@@ -1,67 +1,54 @@
 ﻿@model RegisterViewModel
 @using Microsoft.AspNetCore.Identity
 
-<div class="row col-md-10 offset-md-1">
-    <h1 class="text-primary text-center pt-2">Register</h1>
-    <form method="post" asp-controller="Account" asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">
-        <div class="border p-2 rounded">
-            <p class="text-center">Create a new account</p>
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Email" class="col-12"></label>
-                <div class="col-md-12">
-                    <input asp-for="Email" class="form-control"/>
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
+<!-- Register form -->
+<section class="signup">
+    <div class="container">
+        <div class="signup-content">
+            <div class="signup-form">
+                <h2 class="form-title">Sign up</h2>
+                <form method="post" asp-controller="Account" asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]" class="register-form" id="register-form">
+                    <div class="form-group">
+                        <label asp-for="FirstName"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                        <input asp-for="FirstName" type="text" placeholder="First Name" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LastName"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                        <input asp-for="LastName" type="text"  placeholder="Last Name" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email"><i class="zmdi zmdi-email"></i></label>
+                        <input asp-for="Email" type="email" placeholder="Your Email" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password"><i class="zmdi zmdi-lock"></i></label>
+                        <input asp-for="Password" type="password" placeholder="Password" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ConfirmPassword"><i class="zmdi zmdi-lock-outline"></i></label>
+                        <input asp-for="ConfirmPassword" type="password" placeholder="Repeat your password" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
+                        <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
+                    </div>
+                    <div class="form-group form-button">
+                        <input type="submit" name="signup" id="signup" class="form-submit" value="Register" />
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="FirstName" class="col-12"></label>
-                <div class="col-md-12">
-                    <input asp-for="FirstName" class="form-control" />
-                    <span asp-validation-for="FirstName" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="col-12"></label>
-                <div class="col-md-12">
-                    <input asp-for="LastName" class="form-control" />
-                    <span asp-validation-for="LastName" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="Password" class="col-12"></label>
-                <div class="col-md-12">
-                    <input asp-for="Password" class="form-control" />
-                    <span asp-validation-for="Password" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="ConfirmPassword" class="col-12"></label>
-                <div class="col-md-12">
-                    <input asp-for="ConfirmPassword" class="form-control" />
-                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-                </div>
-            </div>
-@*             <div class="form-group">
-                <label asp-for="RoleSelected" class="col-12"></label>
-                <div class="col-md-12">
-                    <select asp-for="RoleSelected" asp-items="@Model.RoleList" class="form-select">
-                        <option disabled selected>--Select Role--</option>
-                    </select>
-                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-                </div>
-            </div> *@
-            <div class="form-group pt-3">
-                
-                <div class="col-md-6 offset-md-3">
-                    <button class="btn btn-success form-control" type="submit">
-                        Register
-                    </button>
-                </div>
+            <div class="signup-image">
+                <figure><img src="~/colorlib/images/signup-image.jpg" alt="sing up image"></figure>
+                <a asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" class="signup-image-link">I am already member</a>
             </div>
         </div>
-    </form>
-
+    </div>
+</section>
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

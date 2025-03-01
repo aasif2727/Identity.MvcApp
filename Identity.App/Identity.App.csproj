@@ -24,4 +24,8 @@
     <ProjectReference Include="..\Identity.Core\Identity.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\colorlib\" />
+  </ItemGroup>
+
 </Project>

@@ -3,7 +3,7 @@
 @using Identity.Core.Entites
 @inject SignInManager<IdentityUser> signinManager
 
-<div class="row col-md-10 offset-md-1">
+@* <div class="row col-md-10 offset-md-1">
     <h1 class="text-primary text-center pt-2">Log in</h1>
     <form method="post" asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]">
         <div class="border p-2 rounded">
@@ -52,7 +52,49 @@
             </div>
         </div>
     </form>
-</div>
+</div> *@
+
+<!-- Sing in  Form -->
+<section class="sign-in">
+    <div class="container">
+        <div class="signin-content">
+            <div class="signin-image">
+                <figure><img src="~/colorlib/images/signin-image.jpg" alt="sing up image"></figure>
+                <a asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]" class="signup-image-link">Create an account</a>
+                <a asp-action="ForgotPassword" class="signup-image-link">Forgot password?</a>
+            </div>
+
+            <div class="signin-form">
+                <h2 class="form-title">Sign in</h2>
+                <form method="post" asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" class="register-form" id="login-form">
+                    <div class="form-group">
+                        <label asp-for="Email"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                        <input type="text" asp-for="Email" placeholder="Your Email" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password"><i class="zmdi zmdi-lock"></i></label>
+                        <input type="password" asp-for="Password" placeholder="Password" />
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" asp-for="RememberMe" />
+                        <label asp-for="RememberMe" class="label-agree-term"><span><span></span></span>Remember me</label>
+                    </div>
+                    <div class="form-group form-button">
+                        <input type="submit" name="signin" id="signin" class="form-submit" value="Log in" />
+                    </div>
+                </form>
+                <div class="social-login">
+                    <span class="social-label">Or login with</span>
+                    <ul class="socials">
+                        <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
+                        <li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li>
+                        <li><a href="#"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 @section Scripts {
     @{
