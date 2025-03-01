@@ -13,8 +13,9 @@ namespace Identity.Core.EntityConfigs
     {
         public void Configure(EntityTypeBuilder<ApplicationUser> builder)
         {
-            builder.Property(p => p.Name).IsRequired(true).HasMaxLength(100);
-            builder.Property(p => p.DateCreated).IsRequired(false).HasDefaultValueSql("getdate()");
+            builder.Property(p => p.FirstName).IsRequired(true).HasMaxLength(100);
+            builder.Property(p => p.LastName).IsRequired(true).HasMaxLength(100);
+            builder.Property(p => p.DateCreated).IsRequired(true).HasDefaultValueSql("getdate()");
             builder.Ignore(p => p.RoleId);
             builder.Ignore(p => p.Role);
             builder.Ignore(p => p.UserClaim);

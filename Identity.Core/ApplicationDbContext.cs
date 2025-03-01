@@ -14,7 +14,7 @@ namespace Identity.Core
             _configuration = configuration;
         }
 
-        //public DbSet<ApplicationUser> ApplicationUser { get; set; }
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -28,7 +28,7 @@ namespace Identity.Core
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.ApplyConfiguration<ApplicationUser>(new ApplicationUserConfig());
+            modelBuilder.ApplyConfiguration<ApplicationUser>(new ApplicationUserConfig());
             base.OnModelCreating(modelBuilder);
         }
     }
