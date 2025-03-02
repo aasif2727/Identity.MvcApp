@@ -1,6 +1,8 @@
+using Identity.App.Services;
 using Identity.Core;
 using Identity.Core.IRepository;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,8 +18,19 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
         sqlOptions.MigrationsAssembly("Identity.App");
     })
 );
-builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+builder.Services.Configure<IdentityOptions>(opt =>
+{
+    opt.Password.RequireDigit = false;
+    opt.Password.RequireLowercase = false;
+    opt.Password.RequireNonAlphanumeric = false;
+    opt.Lockout.MaxFailedAccessAttempts = 3;
+    opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromDays(1);
+    opt.SignIn.RequireConfirmedEmail = false;
+});
+
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 /******************* Configure the HTTP request pipeline. ************/
 var app = builder.Build();

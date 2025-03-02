@@ -67,16 +67,19 @@
             <div class="signin-form">
                 <h2 class="form-title">Sign in</h2>
                 <form method="post" asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" class="register-form" id="login-form">
+                    <div asp-validation-summary="All" class="text-danger"></div>
                     <div class="form-group">
                         <label asp-for="Email"><i class="zmdi zmdi-account material-icons-name"></i></label>
                         <input type="text" asp-for="Email" placeholder="Your Email" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Password"><i class="zmdi zmdi-lock"></i></label>
                         <input type="password" asp-for="Password" placeholder="Password" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" asp-for="RememberMe" />
+                        <input type="checkbox" class="agree-term" asp-for="RememberMe" />
                         <label asp-for="RememberMe" class="label-agree-term"><span><span></span></span>Remember me</label>
                     </div>
                     <div class="form-group form-button">
