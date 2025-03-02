@@ -33,7 +33,22 @@ namespace Identity.App.Controllers
         [HttpGet()]
         public async Task<IActionResult> Register()
         {
-            RegisterViewModel registerViewModel = new RegisterViewModel();
+            //logic moved to rolecontroller
+            //if (!_roleManager.RoleExistsAsync(AppConstants.Admin).GetAwaiter().GetResult())
+            //{
+            //    await _roleManager.CreateAsync(new IdentityRole(AppConstants.Admin));
+            //    await _roleManager.CreateAsync(new IdentityRole(AppConstants.Customer));
+            //}
+
+            //bind the role to register dropdown
+            RegisterViewModel registerViewModel = new()
+            {
+                RoleList = _roleManager.Roles.Select(x => x.Name).Select(i => new SelectListItem
+                {
+                    Text = i,
+                    Value = i
+                }).ToList()
+            };
             return View(registerViewModel);
         }
 
@@ -56,6 +71,16 @@ namespace Identity.App.Controllers
                 IdentityResult result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    //on success user registration map user-role
+                    if (model.RoleSelected != null)
+                    {
+                        await _userManager.AddToRoleAsync(user, model.RoleSelected);
+                    }
+                    else
+                    {
+                        await _userManager.AddToRoleAsync(user, AppConstants.Customer);
+                    }
+
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackurl = Url.Action("ConfirmEmail", "Account", new
                     {

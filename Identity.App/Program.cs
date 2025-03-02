@@ -28,6 +28,10 @@ builder.Services.Configure<IdentityOptions>(opt =>
     opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromDays(1);
     opt.SignIn.RequireConfirmedEmail = false;
 });
+builder.Services.ConfigureApplicationCookie(option => 
+{
+    option.AccessDeniedPath = new PathString("/Home/AccessDenied");
+});
 
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 builder.Services.AddTransient<IEmailSender, EmailSender>();
