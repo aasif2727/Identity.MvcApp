@@ -2,19 +2,26 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Identity.App.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace Identity.App.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    public HomeController(ILogger<HomeController> logger)
+    private readonly UserManager<IdentityUser> _userManager;
+    public HomeController(ILogger<HomeController> logger, UserManager<IdentityUser> userManager)
     {
         _logger = logger;
+        _userManager = userManager;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
+        var user = await _userManager.GetUserAsync(User);
+        var roles = user != null ? await _userManager.GetRolesAsync(user) : new List<string>();
+
+        ViewBag.UserRoles = roles.Any() ? string.Join(", ", roles) : "No Role Assigned";
         return View();
     }
 
