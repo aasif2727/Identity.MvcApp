@@ -10,6 +10,7 @@
     <link href="~/colorlib/css/style.css" rel="stylesheet" />
     <link href="~/colorlib/fonts/material-icon/css/material-design-iconic-font.css" rel="stylesheet" />
     <link href="~/colorlib/fonts/material-icon/css/material-design-iconic-font.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <header>
@@ -28,14 +29,23 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">Users</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="Index">Roles</a>
+                        </li>
                     </ul>
                 </div>
                 <partial name="_LoginPartialCustom" />
             </div>
         </nav>
     </header>
-    <div class="main">
-        @RenderBody()
+    <div class="container">
+        <main role="main" class="pb-3">
+            <partial name="_Toaster" />
+            @RenderBody()
+        </main>
     </div>
 
     <footer class="border-top footer text-muted">

@@ -3,6 +3,7 @@ using Identity.Core.EntityConfigs;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace Identity.Core
 {
@@ -23,7 +24,7 @@ namespace Identity.Core
                     sqlServerOptionsAction: sqlOptions =>
                     {
                         sqlOptions.EnableRetryOnFailure(maxRetryCount: 10, maxRetryDelay: TimeSpan.FromSeconds(10), errorNumbersToAdd: null);
-                    });
+                    }).LogTo(Console.WriteLine, new[] { DbLoggerCategory.Database.Command.Name }, LogLevel.Information);
             }
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
