@@ -14,5 +14,8 @@ namespace Identity.Core.IRepository
         public Task<IdentityRole> GetRoleById(string roleId);
         public Task<int> GetUserExistsByRoleId(string roleId);
         public Task<List<ApplicationUser>> GetUsers();
+        public Task<ApplicationUser> GetUserById(string userId);
+        public Task DeleteUserById(string userId);
+        public Task SaveChanges();
     }
 }

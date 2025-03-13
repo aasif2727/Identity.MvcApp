@@ -49,5 +49,20 @@ namespace Identity.Core
         {
             return await _db.ApplicationUser.ToListAsync();
         }
+        public async Task<ApplicationUser> GetUserById(string userId)
+        {
+            return await _db.ApplicationUser.FindAsync(userId);
+        }
+        public async Task DeleteUserById(string userId)
+        {
+            var user = await _db.ApplicationUser.FindAsync(userId);
+            _db.ApplicationUser.Remove(user);
+            await _db.SaveChangesAsync();
+        }
+
+        public async Task SaveChanges()
+        {
+            await _db.SaveChangesAsync();
+        }
     }
 }
